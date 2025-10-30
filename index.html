@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMS CDR Reports</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+    button { padding: 10px 15px; margin-top: 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>📊 SMS CDR Report Viewer</h1>
+  <button onclick="fetchData()">Fetch Report</button>
+  <pre id="output">Click "Fetch Report" to load data...</pre>
+
+  <script>
+    async function fetchData() {
+      document.getElementById('output').textContent = 'Loading...';
+      try {
+        const res = await fetch('/api/smscdr');
+        const text = await res.text();
+        document.getElementById('output').textContent = text;
+      } catch (err) {
+        document.getElementById('output').textContent = 'Error fetching data: ' + err;
+      }
+    }
+  </script>
+</body>
+</html>
